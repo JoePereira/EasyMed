@@ -4,10 +4,13 @@ import { styles } from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { RegistroScreenNavigationProp } from '../../navigation/AppNavigator';
+import { UsuariosProvider, useUsuarios } from '../../context/UsuariosContext';
+import Toast from 'react-native-toast-message';
 
 export default function Registro() {
 
     const navigation = useNavigation<RegistroScreenNavigationProp>();
+    const { adicionarUsuario } = useUsuarios();
 
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
@@ -18,8 +21,39 @@ export default function Registro() {
 
 
     const handleRegistro = () => {
-        // Adicione aqui a lógica para lidar com o registro
-        // Por exemplo, você pode validar os campos e fazer uma chamada à API para registrar o usuário
+
+        if (senha !== confirmarSenha) {
+            Toast.show({
+                type: 'error',
+                position: 'bottom',
+                text1: 'Erro',
+                text2: 'As senhas não coincidem',
+                visibilityTime: 5000,
+                autoHide: true,
+                topOffset: 50,
+            });
+            return;
+        }
+
+        const novoUsuario = {
+            nome,
+            email,
+            senha,
+        };
+
+
+        adicionarUsuario(novoUsuario);
+
+        Toast.show({
+            type: 'success',
+            position: 'bottom',
+            text1: `Parabens ${nome}! cadastro feito com sucesso`,
+            visibilityTime: 5000, // Tempo que o toast ficará visível (em milissegundos)
+            autoHide: true,
+            topOffset: 50, // Distância do topo da tela
+        });
+
+        navigation.navigate('Login');
     };
 
     const handleEntrar = () => {
