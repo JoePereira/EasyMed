@@ -3,15 +3,16 @@ import { Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
 import { styles } from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { HomeScreenNavigationProp } from '../../navigation/AppNavigator';
+import { HomeScreenNavigationProp, HomeSupervisorScreenNavigationProp } from '../../navigation/AppNavigator';
 import { useUsuarios } from '../../context/UsuariosContext';
 import Toast from 'react-native-toast-message';
 
 export default function Login() {
 
-    const navigation = useNavigation<HomeScreenNavigationProp>()
+    const navigation = useNavigation<HomeScreenNavigationProp | HomeSupervisorScreenNavigationProp>()
 
     const { usuarios } = useUsuarios();
+    console.log("🚀 ~ file: index.tsx:15 ~ Login ~ usuarios:", usuarios)
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     const [mostrarSenha, setMostrarSenha] = useState(false);
@@ -26,7 +27,7 @@ export default function Login() {
         );
 
         if (usuarioEncontrado) {
-            // Credenciais válidas, realizar ação desejada (por exemplo, navegar para a próxima tela)
+            console.log("🚀 ~ file: index.tsx:29 ~ handleLogin ~ usuarioEncontrado:", usuarioEncontrado)
             Toast.show({
                 type: 'success',
                 position: 'bottom',
@@ -36,9 +37,14 @@ export default function Login() {
                 topOffset: 50,
             });
 
-            // Implemente aqui a ação desejada após o login bem-sucedido, como navegar para a próxima tela.
-            // Por exemplo:
-            navigation.navigate('Home');
+            if(usuarioEncontrado.supervisor === true){
+                console.log("🚀 ~ file: index.tsx:29 ~ handleLogin ~ AQIO:", usuarioEncontrado)
+                navigation.navigate('HomeSupervisor');
+            }else {
+
+                navigation.navigate('Home');
+            }
+            
         } else {
             // Credenciais inválidas, exibe mensagem de erro
             Toast.show({

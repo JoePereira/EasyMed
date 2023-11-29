@@ -57,4 +57,9 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
+  checkBox: {
+    borderColor: '#FCFDF5',
+    backgroundColor: '#FCFDF5',
+    borderRadius: 7
+  },
 });

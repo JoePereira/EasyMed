@@ -55,7 +55,7 @@ export default function CadMedicamento () {
         setMedicamentoSolido(false)
         setQuantidade('')
         setVolume('')
-        setSelectedTime(null)
+    
         
         setShowConfirmationModal(false);
     };
@@ -81,8 +81,6 @@ export default function CadMedicamento () {
         setMedicamentoSolido(false)
         setQuantidade('')
         setVolume('')
-        setSelectedTime(null)
-        
 
         Toast.show({
             type: 'success',
@@ -100,6 +98,8 @@ export default function CadMedicamento () {
     };
 
     return (
+        <MedicamentosProvider>
+
             <View style={styles.container}>
 
                 <View style={styles.containerLogo}>
@@ -231,7 +231,8 @@ export default function CadMedicamento () {
                     </Modal>
 
                 </View>
-            </View>      
+            </View>
+        </MedicamentosProvider>       
     )
 
 }

@@ -23,7 +23,6 @@ export function MeusMedicamentos() {
 
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedMedicamento, setSelectedMedicamento] = useState<Medicamento | null>(null);   
-    console.log("🚀 ~ file: index.tsx:26 ~ MeusMedicamentos ~ selectedMedicamento:", selectedMedicamento)
 
     const renderItem = ({ item }: { item: Medicamento }) => (
         <View style={styles.medicamentoItem}>
@@ -93,21 +92,6 @@ export function MeusMedicamentos() {
                             <Text>Dias de consumo:</Text>
                             <Text>{selectedMedicamento.qntDias}</Text>
                         </View>
-                        {selectedMedicamento.medicamentoLiquido === true ?
-                            (
-                                <View style={styles.medItem}>
-                                    <Text>Ml por dia:</Text>
-                                    <Text>{selectedMedicamento.volume}ml</Text>
-                                </View>
-                            ) :
-                            (
-                                <View style={styles.medItem}>
-                                    <Text>Comprimidos por dia:</Text>
-                                    <Text>{selectedMedicamento.quantidade}</Text>
-                                </View>
-                            )
-                        }
-                        
                         <View style={styles.medItem}>
                             <Text>Horario de Consumo:</Text>
                             <Text>{selectedMedicamento.horario}</Text>

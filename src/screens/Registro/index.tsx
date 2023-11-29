@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import { RegistroScreenNavigationProp } from '../../navigation/AppNavigator';
 import { UsuariosProvider, useUsuarios } from '../../context/UsuariosContext';
 import Toast from 'react-native-toast-message';
+import { CheckBox } from 'react-native-elements';
 
 export default function Registro() {
 
@@ -18,7 +19,8 @@ export default function Registro() {
     const [confirmarSenha, setConfirmarSenha] = useState('');
     const [mostrarSenha, setMostrarSenha] = useState(false);
     const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false);
-
+    const [ supervisor, setSupervisor ] = useState(false);
+    const [dependente, setDependente] = useState<[]>([])
 
     const handleRegistro = () => {
 
@@ -28,7 +30,7 @@ export default function Registro() {
                 position: 'bottom',
                 text1: 'Erro',
                 text2: 'As senhas não coincidem',
-                visibilityTime: 5000,
+                visibilityTime: 3000,
                 autoHide: true,
                 topOffset: 50,
             });
@@ -39,6 +41,8 @@ export default function Registro() {
             nome,
             email,
             senha,
+            supervisor,
+            dependente
         };
 
 
@@ -48,7 +52,7 @@ export default function Registro() {
             type: 'success',
             position: 'bottom',
             text1: `Parabens ${nome}! cadastro feito com sucesso`,
-            visibilityTime: 5000, // Tempo que o toast ficará visível (em milissegundos)
+            visibilityTime: 3000, // Tempo que o toast ficará visível (em milissegundos)
             autoHide: true,
             topOffset: 50, // Distância do topo da tela
         });
@@ -119,6 +123,15 @@ export default function Registro() {
                     color="black"
                 />
             </TouchableOpacity>
+
+            <CheckBox
+                title="Supervisor"
+                checked={supervisor}
+                onPress={() => {
+                    setSupervisor(!supervisor);
+                }}
+                containerStyle={styles.checkBox}
+            />
 
             <TouchableOpacity style={styles.botao} onPress={handleRegistro}>
                 <Text style={styles.textoBotao}>Registrar-se</Text>
