@@ -1,5 +1,5 @@
 import React, { useState } from  'react';
-import { Text, View, TextInput, Image, TouchableOpacity } from 'react-native';
+import { Text, View, TextInput, Image, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
 import { styles } from './styles';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -57,6 +57,11 @@ export default function Registro() {
             topOffset: 50, // Distância do topo da tela
         });
 
+        setNome('')
+        setEmail('')
+        setSenha('')
+        setConfirmarSenha('')
+
         navigation.navigate('Login');
     };
 
@@ -74,68 +79,76 @@ export default function Registro() {
     };
 
     return (
-        <View style={styles.container}>
-            <Image source={require('../../assets/images/logo.jpeg')} style={styles.logo} />
-            <Text style={styles.titulo}>Registre-se</Text>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={styles.container}
+        >
+            <View style={styles.container}>
+                <Image source={require('../../assets/images/logo.jpeg')} style={styles.logo} />
+                <Text style={styles.titulo}>Registre-se</Text>
 
-            <TouchableOpacity style={styles.entrarPosicao} onPress={handleEntrar}>
-                <Text style={styles.entrar}>Entrar</Text>
-            </TouchableOpacity>
-
-            <TextInput
-                style={styles.input}
-                placeholder="Nome"
-                value={nome}
-                onChangeText={setNome}
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Senha"
-                value={senha}
-                onChangeText={setSenha}
-                secureTextEntry={!mostrarSenha}
-            />
-            <TouchableOpacity onPress={toggleMostrarSenha} style={styles.iconeSenha}>
-                <Ionicons
-                    name={mostrarSenha ? 'eye-off' : 'eye'}
-                    size={24}
-                    color="black"
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nome"
+                    value={nome}
+                    onChangeText={setNome}
                 />
-            </TouchableOpacity>
-            <TextInput
-                style={styles.input}
-                placeholder="Confirme a senha"
-                value={confirmarSenha}
-                onChangeText={setConfirmarSenha}
-                secureTextEntry={!mostrarConfirmarSenha}
-            />
-            <TouchableOpacity onPress={toggleMostrarConfirmarSenha} style={styles.iconeConfirmarSenha}>
-                <Ionicons
-                    name={mostrarConfirmarSenha ? 'eye-off' : 'eye'}
-                    size={24}
-                    color="black"
+                <TextInput
+                    style={styles.input}
+                    placeholder="Email"
+                    value={email}
+                    onChangeText={setEmail}
+                    keyboardType="email-address"
                 />
-            </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Senha"
+                    value={senha}
+                    onChangeText={setSenha}
+                    secureTextEntry={!mostrarSenha}
+                />
+                <TouchableOpacity onPress={toggleMostrarSenha} style={styles.iconeSenha}>
+                    <Ionicons
+                        name={mostrarSenha ? 'eye-off' : 'eye'}
+                        size={24}
+                        color="black"
+                    />
+                </TouchableOpacity>
+                <TextInput
+                    style={styles.input}
+                    placeholder="Confirme a senha"
+                    value={confirmarSenha}
+                    onChangeText={setConfirmarSenha}
+                    secureTextEntry={!mostrarConfirmarSenha}
+                />
+                <TouchableOpacity onPress={toggleMostrarConfirmarSenha} style={styles.iconeConfirmarSenha}>
+                    <Ionicons
+                        name={mostrarConfirmarSenha ? 'eye-off' : 'eye'}
+                        size={24}
+                        color="black"
+                    />
+                </TouchableOpacity>
 
-            <CheckBox
-                title="Supervisor"
-                checked={supervisor}
-                onPress={() => {
-                    setSupervisor(!supervisor);
-                }}
-                containerStyle={styles.checkBox}
-            />
+                <CheckBox
+                    title="Cuidador"
+                    checked={supervisor}
+                    onPress={() => {
+                        setSupervisor(!supervisor);
+                    }}
+                    containerStyle={styles.checkBox}
+                />
 
-            <TouchableOpacity style={styles.botao} onPress={handleRegistro}>
-                <Text style={styles.textoBotao}>Registrar-se</Text>
-            </TouchableOpacity>
-        </View>
+                <TouchableOpacity style={styles.botao} onPress={handleRegistro}>
+                    <Text style={styles.textoBotao}>Registrar-se</Text>
+                </TouchableOpacity>
+
+                <View style={styles.containerEntrar}>
+                    <Text style={styles.entrarText}>Possui Cadastro?{' '}</Text>
+                    <TouchableOpacity onPress={handleEntrar}>
+                        <Text style={styles.entrar}>Entrar</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        </KeyboardAvoidingView>
     )
 }

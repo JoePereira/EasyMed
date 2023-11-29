@@ -92,6 +92,18 @@ export function MeusMedicamentos() {
                             <Text>Dias de consumo:</Text>
                             <Text>{selectedMedicamento.qntDias}</Text>
                         </View>
+                        {selectedMedicamento.medicamentoSolido === true ? 
+                            (<View style={styles.medItem}>
+                                <Text>Comprimidos por dia:</Text>
+                                <Text>{selectedMedicamento.quantidade}</Text>
+                            </View>) : 
+                            (
+                                <View style={styles.medItem}>
+                                    <Text>Ml por dia:</Text>
+                                    <Text>{selectedMedicamento.volume} ml</Text>
+                                </View>
+                            )
+                        }
                         <View style={styles.medItem}>
                             <Text>Horario de Consumo:</Text>
                             <Text>{selectedMedicamento.horario}</Text>

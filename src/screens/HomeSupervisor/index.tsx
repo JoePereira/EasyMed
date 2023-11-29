@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, Image, Text } from "react-native";
 import { styles} from './styles';
 import { CadDependenteScreenNavigationProp, CameraScreenNavigationProp, MeusMedicamentoScreenNavigationProp } from "../../navigation/AppNavigator";
-import Modal from 'react-native-modal';
 
 export default function HomeSupervisor() {
     const navigation = useNavigation<CadDependenteScreenNavigationProp | MeusMedicamentoScreenNavigationProp | CameraScreenNavigationProp>();
@@ -58,43 +57,6 @@ export default function HomeSupervisor() {
                     <Text  style={styles.textoBotao}>Meus Dependentes</Text>
                 </View>
             </View>
-
-            <View style={styles.botoesContainer}>
-                {/* Botão 3 */}
-                <View style={styles.botaoWrapper}>
-                    <TouchableOpacity
-                    style={styles.botao}
-                    onPress={() => handleButtonPress(3)}
-                    >
-                        <Image source={require('../../assets/images/mao.png')} style={styles.imagemBotao} />
-                    </TouchableOpacity>
-                    <Text  style={styles.textoBotao}>Simular</Text>
-                </View>
-            </View>
-            <Modal
-            isVisible={isModalVisible}
-            onBackdropPress={() => setModalVisible(false)}
-            animationIn="slideInUp"
-            animationOut="slideOutDown"
-            backdropOpacity={0.5}
-            >
-                <View style={styles.modalContainer}>
-                    <Text style={styles.modalTitle}>Atenção, você tem um remedio para tomar</Text>
-                    <Text>Remedio: Aspirina</Text>
-                    <Text>Comprimidos: 1</Text>
-                    <View style={styles.botoesContainer}>
-                        <View style={styles.botaoWrapper}>
-                            <TouchableOpacity
-                            style={styles.botao}
-                            onPress={() => startCamera()}
-                            >
-                                <Image source={require('../../assets/images/camera.png')} style={styles.imagemBotao} />
-                            </TouchableOpacity>
-                            <Text  style={styles.textoBotao}>Identificar Remédio</Text>
-                        </View>
-                    </View>
-                </View>
-            </Modal>
         </View>
     )
 }

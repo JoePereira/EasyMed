@@ -21,10 +21,8 @@ export const styles = StyleSheet.create({
     color: 'orange',
     fontSize: 20,
   },
-  logarPosicao:{
-    position: 'absolute',
-    top: 40,
-    right: 10,
+  logarText:{
+    fontSize: 20,
   },
   input: {
     height: 50,
@@ -56,4 +54,8 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
   },
+  containerRegistrar: {
+    top: 10,
+    flexDirection: 'row'
+  }
 });

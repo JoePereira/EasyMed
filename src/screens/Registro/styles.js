@@ -22,10 +22,8 @@ export const styles = StyleSheet.create({
     color: 'orange',
     fontSize: 20,
   },
-  entrarPosicao:{
-    position: 'absolute',
-    top: 40,
-    right: 10,
+  entrarText:{
+    fontSize: 20,
   },
   input: {
     height: 50,
@@ -62,4 +60,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FCFDF5',
     borderRadius: 7
   },
+  containerEntrar: {
+    top: 10,
+    flexDirection: 'row'
+  }
 });

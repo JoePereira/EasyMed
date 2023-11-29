@@ -10,6 +10,7 @@ import { MeusMedicamentos } from '../screens/MeusMedicamentos';
 import CameraScreen from '../screens/Camera';
 import HomeSupervisor from '../screens/HomeSupervisor';
 import CadDependente from '../screens/CadDependente';
+import { MedicamentosProvider } from '../context/MedicamentosContext';
 
 type RootStackParamList = {
   Registro: undefined;
@@ -35,6 +36,8 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 function AppNavigator() {
   return (
+    <MedicamentosProvider>
+
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Registro">
         <Stack.Screen name="Registro" component={Registro} />
@@ -42,12 +45,14 @@ function AppNavigator() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="HomeSupervisor" component={HomeSupervisor} />
         <Stack.Screen name="CadMedicamento" component={CadMedicamento} />
-        <Stack.Screen name="CadDependente" component={CadDependente} />
         <Stack.Screen name="MeusMedicamentos" component={MeusMedicamentos} />
+        <Stack.Screen name="CadDependente" component={CadDependente} />
         <Stack.Screen name="CameraScreen" component={CameraScreen} />
       </Stack.Navigator>
       <ToastMessage position="bottom" />
     </NavigationContainer>
+    </MedicamentosProvider>
+
   );
 }
 
