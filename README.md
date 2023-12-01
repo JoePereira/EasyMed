@@ -4,16 +4,20 @@ Bem-vindo ao EasyMed, o seu aplicativo dedicado a auxiliar idosos na identifica�
 
 ## Equipe
 
-- Bruno
-- Igor Lemos
-- Joederson Oliveira
-- Mario Ito
+- Bruno Barbosa Braga dos Santos - RM96685
+- Igor Augusto Takeshigue Lemos - RM97012
+- Joederson Oliveira Pereira - RM97192
+- Mário Ito Bocchini - RM96950
+
 
 ## Funcionalidades Principais
 
 ### Reconhecimento de Medicamentos por Câmera
 
 Utilizando a câmera do dispositivo, o aplicativo identifica as caixas de medicamentos e fornece informações detalhadas sobre o medicamento, incluindo posologia e instruções de uso.
+
+### Notificações
+O aplicativo notifica o usuário nas datas e horários de suas medicações
 
 ### Área do Cuidador
 
