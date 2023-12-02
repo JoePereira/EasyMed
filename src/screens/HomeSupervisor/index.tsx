@@ -1,30 +1,24 @@
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState, useEffect } from "react";
 import { TouchableOpacity, View, Image, Text } from "react-native";
 import { styles} from './styles';
-import { CadDependenteScreenNavigationProp, CameraScreenNavigationProp, MeusMedicamentoScreenNavigationProp } from "../../navigation/AppNavigator";
+import { CadDependenteScreenNavigationProp, CameraScreenNavigationProp, MeusDependentesScreenNavigationProp, MeusMedicamentoScreenNavigationProp } from "../../navigation/AppNavigator";
 
 export default function HomeSupervisor() {
-    const navigation = useNavigation<CadDependenteScreenNavigationProp | MeusMedicamentoScreenNavigationProp | CameraScreenNavigationProp>();
+    const navigation = useNavigation<CadDependenteScreenNavigationProp | MeusDependentesScreenNavigationProp>();
+    const route = useRoute();
 
-    const [isModalVisible, setModalVisible] = useState(false);
+    const { nomeUsuario } = route.params as { nomeUsuario?: string };
+    console.log("🚀 ~ file: index.tsx:12 ~ HomeSupervisor ~ nomeUsuario:", nomeUsuario)
 
-    const [openCamera, setOpenCamera] = useState(false)
+    const params = { nomeUsuario: nomeUsuario };
 
     const handleButtonPress = (buttonNumber: number) => {
         if(buttonNumber === 1 ){
-            navigation.navigate('CadDependente')
+            navigation.navigate('CadDependente', params)
         }else if (buttonNumber === 2){
-            navigation.navigate('MeusMedicamentos')
-        }else if (buttonNumber === 3){
-            setModalVisible(true)
+            navigation.navigate('MeusDependentes', params)
         }
-    }
-
-    const startCamera = () => {
-        setOpenCamera(true);
-        setModalVisible(false);
-        navigation.navigate('CameraScreen');
     }
 
     return (

@@ -1,18 +1,20 @@
 import { useState } from "react";
 import { TextInput, View, Text, Image, TouchableOpacity, Modal } from "react-native";
-import { CheckBox } from "react-native-elements";
 
 import { styles } from "./styles";
-import { HomeScreenNavigationProp } from "../../navigation/AppNavigator";
-import { useNavigation } from "@react-navigation/native";
+import { HomeSupervisorScreenNavigationProp } from "../../navigation/AppNavigator";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import Toast from "react-native-toast-message";
-import { MedicamentosProvider, useMedicamentos } from "../../context/MedicamentosContext";
-import { TimePickerModal } from "react-native-paper-dates";
 import { useUsuarios } from "../../context/UsuariosContext";
 
 export default function CadDependente () {
 
-    const { usuarios } = useUsuarios();
+    const { usuarios, adicionarDependente } = useUsuarios();
+    const navigation = useNavigation<HomeSupervisorScreenNavigationProp>();
+    const route = useRoute();
+
+    const { nomeUsuario } = route.params as { nomeUsuario?: string };
+
 
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('');
@@ -22,6 +24,10 @@ export default function CadDependente () {
     const usuarioEncontrado = usuarios.find(
         (usuario) => usuario.nome === nome && usuario.email === email
     );
+    const usuarioEncontradoCuidador = usuarios.find(
+        (usuario) => usuario.nome === nomeUsuario
+    );
+    console.log("🚀 ~ file: index.tsx:30 ~ CadDependente ~ usuarioEncontradoCuidador:", usuarioEncontradoCuidador)
 
     const handleCadDependente = () => {
         if(!usuarioEncontrado){
@@ -47,6 +53,10 @@ export default function CadDependente () {
             email
         };
 
+        if(usuarioEncontradoCuidador ){
+            adicionarDependente(usuarioEncontradoCuidador.email, novoDependente);
+        }
+
         Toast.show({
             type: 'success',
             position: 'bottom',
@@ -57,6 +67,8 @@ export default function CadDependente () {
         });
 
         setShowConfirmationModal(false);
+        navigation.navigate('HomeSupervisor', route.params)
+
     };
 
     const handleCancel = () => {
