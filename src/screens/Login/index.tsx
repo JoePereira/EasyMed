@@ -19,14 +19,11 @@ export default function Login() {
 
 
     const handleLogin = () => {
-        // Adicione aqui a lógica para lidar com o registro
-        // Por exemplo, você pode validar os campos e fazer uma chamada à API para registrar o usuário
         const usuarioEncontrado = usuarios.find(
             (usuario) => usuario.email === email && usuario.senha === senha
         );
 
         if (usuarioEncontrado) {
-            console.log("🚀 ~ file: index.tsx:29 ~ handleLogin ~ usuarioEncontrado:", usuarioEncontrado)
             Toast.show({
                 type: 'success',
                 position: 'bottom',
@@ -36,12 +33,13 @@ export default function Login() {
                 topOffset: 50,
             });
 
+            const params = { nomeUsuario: usuarioEncontrado.nome };
+
             if(usuarioEncontrado.supervisor === true){
-                console.log("🚀 ~ file: index.tsx:29 ~ handleLogin ~ AQIO:", usuarioEncontrado)
-                navigation.navigate('HomeSupervisor');
+                navigation.navigate('HomeSupervisor', params);
             }else {
 
-                navigation.navigate('Home');
+                navigation.navigate('Home', params);
             }
 
             setEmail('')

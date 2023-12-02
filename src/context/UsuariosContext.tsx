@@ -5,7 +5,7 @@ interface Usuario {
     email: string;
     senha: string;
     supervisor: boolean;
-    dependente?: Dependente[];
+    dependentes?: Dependente[];
 }
 
 interface Dependente {
@@ -16,7 +16,7 @@ interface Dependente {
 interface UsuariosContextData {
     usuarios: Usuario[];
     adicionarUsuario: (usuario:Usuario) => void;
-    // adicionarDependente: (usuarioIndex: number, dependente: Dependente) => void;
+    adicionarDependente: (usuarioEmail: string, dependente: Dependente) => void;
 }
 
 const UsuariosContex = createContext<UsuariosContextData | undefined>(undefined);
@@ -29,21 +29,18 @@ export function UsuariosProvider({ children }: { children: ReactNode }) {
         setUsuarios((prevUsuarios) => [...prevUsuarios, usuario]);
     };
 
-    // const adicionarDependente = (usuarioIndex: number, dependente: Dependente) => {
-    //     setUsuarios((preventUsuarios) => {
-    //         const novosUsuarios = [...preventUsuarios];
-    //         const usuarioExistente = novosUsuarios[usuarioIndex];
-
-    //         if(usuarioExistente && usuarioExistente.dependente) {
-    //             usuarioExistente.dependente.push(dependente);
-    //         } else {
-    //             novosUsuarios[usuarioIndex].dependente = [dependente];
-    //         }
-    //     })
-    // };
+    const adicionarDependente = (usuarioEmail: string, dependente: Dependente) => {
+        setUsuarios((prevUsuarios) =>
+        prevUsuarios.map((usuario) =>
+            usuario.email === usuarioEmail
+            ? { ...usuario, dependentes: [...(usuario.dependentes || []), dependente] }
+            : usuario
+        )
+        );
+    };
 
     return (
-        <UsuariosContex.Provider value={{ usuarios, adicionarUsuario }}>
+        <UsuariosContex.Provider value={{ usuarios, adicionarUsuario, adicionarDependente  }}>
             {children}
         </UsuariosContex.Provider>
     );

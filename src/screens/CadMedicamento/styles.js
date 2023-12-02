@@ -9,13 +9,14 @@ export const styles = StyleSheet.create({
   },
   containerLogo: {
       flexDirection: 'row',
-      alignItems: 'center',
+      alignItems: 'flex-start',
       position: 'absolute',
-      top: 20
+      top: 20,
+      left: 10,
   },
   logo: {
-      width: 100,
-      height: 100,
+      width: 30,
+      height: 30,
       marginBottom: 20,
     },
     titulo: {
